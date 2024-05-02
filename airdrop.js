@@ -9,7 +9,7 @@ import base58 from "bs58";
 
   const signature = await connection.requestAirdrop(
     keypair.publicKey,
-    LAMPORTS_PER_SOL
+    1 * LAMPORTS_PER_SOL
   );
 
   const { blockhash, lastValidBlockHeight } = await connection.getLatestBlockhash();

@@ -12,7 +12,7 @@ const add = userKeypair.publicKey.toBase58()
 const userAdd = new PublicKey(add)
 
 // receive address
-const toAdd = new PublicKey('49491M1CaWfQgRmr4Bf4cVkwgr1GQFQ4fmpPcx9Ckc5H')
+const toAdd = new PublicKey(process.env.PUBLIC_KEY)
 
 // balance
 let myBalance = await devConnection.getBalance(userAdd)
@@ -30,7 +30,7 @@ const trans = new Transaction()
 const sendSolInstruction = SystemProgram.transfer({
     fromPubkey: userAdd,
     toPubkey: toAdd,
-    lamports: 50000000,
+    lamports: 0.5 * LAMPORTS_PER_SOL,
 })
 
 trans.add(sendSolInstruction)
@@ -51,5 +51,5 @@ mySol = myBalance / LAMPORTS_PER_SOL
 reSol = toAddBalance / LAMPORTS_PER_SOL
 
 console.log(`My ${userAdd} balance ${mySol} SOL`)
-console.log(`Receive${toAddBalance} balance ${reSol} SOL`)
+console.log(`Receive ${toAdd} balance ${reSol} SOL`)
 
