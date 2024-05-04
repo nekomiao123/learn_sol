@@ -27,13 +27,22 @@ console.log(`Receive ${toAdd} balance ${reSol} SOL`)
 // Transaction
 const trans = new Transaction()
 
-const sendSolInstruction = SystemProgram.transfer({
-    fromPubkey: userAdd,
-    toPubkey: toAdd,
-    lamports: 0.5 * LAMPORTS_PER_SOL,
-})
+// const sendSolInstruction = SystemProgram.transfer({
+//     fromPubkey: userAdd,
+//     toPubkey: toAdd,
+//     lamports: 0.1 * LAMPORTS_PER_SOL,
+// })
 
-trans.add(sendSolInstruction)
+// trans.add(sendSolInstruction)
+
+for (let i = 0; i < 5; i++) {
+    const sendSolInstruction = SystemProgram.transfer({
+        fromPubkey: userAdd,
+        toPubkey: toAdd,
+        lamports: 0.1 * LAMPORTS_PER_SOL,
+    })
+    trans.add(sendSolInstruction)
+}
 
 let signature = await sendAndConfirmTransaction(devConnection, trans, [
     userKeypair,
